@@ -1,0 +1,41 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class ParticipateInForumTest extends TestCase
+{
+
+	use DatabaseMigrations;
+
+	/** @test */
+	public function unauthenticated_users_may_not_add_replies ()
+	{
+		$this->expectException('Illuminate\Auth\AuthenticationException');
+
+		//quando um usuário adiciona um reply a uma thread
+		$this->post('/threads/1/replies', []); 
+	}
+
+    /** @test */
+    public function an_authenticated_user_may_participate_in_forum_threads()
+    {        
+    	//Cria um usuário e realiza o login na aplicação
+        $this->be($user = create('App\User')); 
+
+        //Gera uma nova thread e um novo reply
+		$thread = create('App\Thread');
+		$reply = make('App\Reply');
+
+		//quando um usuário adiciona um reply a uma thread
+		$this->post($thread->path().'/replies', $reply->toArray());        
+
+		//o reply cadastrado deve ser visível na página
+		$this->get($thread->path())
+			->assertSee($reply->body);
+    }
+}
