@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class ReadThreadsTest extends TestCase
 {
 
    use DatabaseMigrations;
@@ -15,7 +15,6 @@ class ExampleTest extends TestCase
    public function setUp ()
    {
      parent::setUp();
-
      $this->thread = create('App\Thread');
    }
 
@@ -48,6 +47,22 @@ class ExampleTest extends TestCase
       $this->get($this->thread->path())
         ->assertSee($reply->body);
     }
+
+    /**
+    * @test
+    */
+    public function a_user_can_filter_threads_according_to_a_tag()
+    {
+        $channel = create('App\Channel');
+        $threadIdChannel = create('App\Thread', ['channel_id' => $channel->id]);
+        $threadNotInChannel = create('App\Thread');
+
+        $this->get('/threads/'. $channel->slug)
+            ->assertSee($threadIdChannel->title)
+            ->assertDontSee($threadNotInChannel->title);
+    }
+
+
 
 
 }
