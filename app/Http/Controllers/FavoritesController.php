@@ -13,9 +13,15 @@ class FavoritesController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Reply $reply
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function store (Reply $reply)
     {
-       return $reply->favorite();
+       $reply->favorite();
+
+       return back();
     }
 
 
