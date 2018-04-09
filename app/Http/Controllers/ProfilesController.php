@@ -14,7 +14,6 @@ class ProfilesController extends Controller
 {
 
     /**
-     *
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
