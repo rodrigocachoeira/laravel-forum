@@ -49,6 +49,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Query\Builder|static
+     */
+    public function activity()
+    {
+        return $this->hasMany(Activity::class)->latest();
+    }
+
+    /**
      * Get the connection of the entity.
      *
      * @return string|null
