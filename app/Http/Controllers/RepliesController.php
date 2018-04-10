@@ -36,6 +36,16 @@ class RepliesController extends Controller
 
     /**
      * @param Reply $reply
+     */
+	public function update(Reply $reply)
+    {
+        $this->authorize('update', $reply);
+
+        $reply->update(['body' => request()->get('body')]);
+    }
+
+    /**
+     * @param Reply $reply
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
