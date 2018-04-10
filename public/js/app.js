@@ -43765,6 +43765,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, function (err) {
                 _this.editing = false;
             });
+        },
+        destroy: function destroy() {
+            var _this2 = this;
+
+            axios.delete('/replies/' + this.attributes.id).then(function (resp) {
+                $(_this2.$el).fadeOut(300, function () {
+                    flash('Your reply has been deleted');
+                });
+            }, function (err) {
+                _this2.editing = false;
+            });
         }
     }
 

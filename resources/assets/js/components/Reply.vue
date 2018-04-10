@@ -20,6 +20,17 @@
                 }, err => {
                     this.editing = false
                 })
+            },
+
+            destroy () {
+                axios.delete('/replies/' + this.attributes.id).then(resp => {
+                    $(this.$el).fadeOut(300, () => {
+                        flash('Your reply has been deleted')
+                    })
+
+                }, err => {
+                    this.editing = false
+                })
             }
 
         }
