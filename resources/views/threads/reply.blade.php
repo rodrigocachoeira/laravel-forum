@@ -9,7 +9,11 @@
         </h5>
         <div>
 
-          <favorite :reply="{{ $reply }}"></favorite>
+          @if (Auth::check())
+
+            <favorite :reply="{{ $reply }}"></favorite>
+
+          @endif
 
         </div>
       </div>

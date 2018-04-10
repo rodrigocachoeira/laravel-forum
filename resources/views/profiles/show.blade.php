@@ -11,7 +11,7 @@
             </h1>
         </div>
 
-        @foreach ($activities as $date => $activity)
+        @forelse ($activities as $date => $activity)
 
             <h3 class="page-header">{{ $date }}</h3>
 
@@ -22,7 +22,9 @@
                 @endif
 
             @endforeach
-        @endforeach
+        @empty
+            There is no activity for this user yet
+        @endforelse
 
         {{--{{ $threads->links()  }}--}}
 
