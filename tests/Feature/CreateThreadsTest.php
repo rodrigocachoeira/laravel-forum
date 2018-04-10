@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Activity;
 use App\Reply;
 use App\Thread;
 use Tests\TestCase;
@@ -91,7 +92,7 @@ class CreateThreadsTest extends TestCase
     /**
     * @test
     */
-    public function a_thread_can_be_deleted()
+    public function authorized_users_can_deleted_threads()
     {
         $this->signIn();
 
@@ -103,6 +104,8 @@ class CreateThreadsTest extends TestCase
 
         $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+
+       $this->assertEquals(0, Activity::count());
     }
 
     public function publishThread ($overrides = [])
