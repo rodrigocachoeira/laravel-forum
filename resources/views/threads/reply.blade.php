@@ -10,9 +10,7 @@
         <div>
 
           @if (Auth::check())
-
             <favorite :reply="{{ $reply }}"></favorite>
-
           @endif
 
         </div>
