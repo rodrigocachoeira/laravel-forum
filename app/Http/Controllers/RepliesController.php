@@ -17,7 +17,7 @@ class RepliesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param $channelId
-     * @param  \Illuminate\Http\Request  $request
+     * @param  $thread
      * @return \Illuminate\Http\Response
      */
 	public function store ($channelId, Thread $thread)
@@ -30,7 +30,7 @@ class RepliesController extends Controller
 			'user_id'	=> auth()->id()
 		]);
 
-		return back(); 
+		return back()->with('flash', 'Your reply has been left.');
 	}
 
 }
