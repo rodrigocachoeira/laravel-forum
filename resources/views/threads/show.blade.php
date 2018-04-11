@@ -36,27 +36,7 @@
 
                   </div>
 
-                  <replies data="{{ json_encode($replies) }}" @removed="repliesCount--" ></replies>
-
-                  {{--@foreach ($replies as $reply)--}}
-
-                  {{--@include ('threads.reply')--}}
-
-                  {{--@endforeach--}}
-
-                  {{--{{ $replies->links() }}--}}
-
-                  @if (auth()->check())
-                      <form method="POST" action="{{ $thread->path() }}.'/replies" >
-                          {{ csrf_field() }}
-                          <div class="form-group" >
-                              <textarea placeholder="Have somethind to say?" rows="5 " name="body" id="body" class="form-control" ></textarea>
-                          </div>
-                          <input type="submit" class="btn btn-primary" value="Post">
-                      </form>
-                  @else
-                      <p class="text-center" >Please <a href="{{ route('login') }}">sign in</a> to participate in this discution.</p>
-                  @endif
+                  <replies data="{{ json_encode($replies) }}" @added="repliesCount++" @removed="repliesCount--" ></replies>
 
               </div>
 
