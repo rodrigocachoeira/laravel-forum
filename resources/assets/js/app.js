@@ -21,8 +21,11 @@ window.Vue.prototype.authorize = function (handler) {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//components
 Vue.component('flash', require('./components/Flash.vue'));
+Vue.component('paginator', require('./components/Paginator.vue'))
 
+//pages
 Vue.component('thread-view', require('./pages/Thread.vue'));
 
 window.events = new Vue();

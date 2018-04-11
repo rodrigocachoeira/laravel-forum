@@ -36,7 +36,7 @@
 
                   </div>
 
-                  <replies data="{{ json_encode($replies) }}" @added="repliesCount++" @removed="repliesCount--" ></replies>
+                  <replies @added="repliesCount++" @removed="repliesCount--" ></replies>
 
               </div>
 
