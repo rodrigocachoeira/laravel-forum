@@ -15,24 +15,24 @@
                     {{ $thread->title }}
                 </span>
 
-                              @can('update', $thread)
+                  @can('update', $thread)
 
-                                  <form action="{{ $thread->path() }}" method="post">
-                                      {{ csrf_field() }}
-                                      {{ method_field('DELETE') }}
+                      <form action="{{ $thread->path() }}" method="post">
+                          {{ csrf_field() }}
+                          {{ method_field('DELETE') }}
 
-                                      <button class="btn btn-link" type="submit">Delete Thread</button>
-                                  </form>
+                          <button class="btn btn-link" type="submit">Delete Thread</button>
+                      </form>
 
-                              @endcan
+                  @endcan
 
-                          </div>
+              </div>
 
-                      </div>
+          </div>
 
-                      <div class="panel-body">
-                          {{ $thread->body }}
-                      </div>
+          <div class="panel-body">
+              {{ $thread->body }}
+          </div>
 
                   </div>
 
@@ -45,8 +45,16 @@
                   <div class="panel panel-default">
 
                       <div class="panel-body">
-                          This thread was published {{ $thread->created_at->diffForHumans()  }} by
-                          <a href="#">{{ $thread->creator->name }}</a>, and currently has <span v-text="repliesCount" ></span> {{ str_plural('comment', $thread->replies_count)  }}.
+
+                          <p>
+                              This thread was published {{ $thread->created_at->diffForHumans()  }} by
+                              <a href="#">{{ $thread->creator->name }}</a>, and currently has <span v-text="repliesCount" ></span> {{ str_plural('comment', $thread->replies_count)  }}.
+                          </p>
+
+                          <p>
+                              <subscribe-button :active="{{ json_encode($thread->isSubscribedTo) }}" ></subscribe-button>
+                          </p>
+
                       </div>
 
                   </div>

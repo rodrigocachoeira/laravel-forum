@@ -24,6 +24,11 @@ class Thread extends Model
   protected $with = ['creator', 'channel'];
 
     /**
+     * @var array
+     */
+  protected $appends = ['isSubscribedTo'];
+
+    /**
      *
      */
   protected static function boot ()
@@ -108,5 +113,39 @@ class Thread extends Model
     public function resolveRouteBinding($value)
     {
         // TODO: Implement resolveRouteBinding() method.
+    }
+
+    public function subscribe($userId = null)
+    {
+        $this->subscriptions()->create([
+            'user_id' => $userId ?: auth()->id()
+        ]);
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function unsubscribe($userId = 1)
+    {
+        $this->subscriptions()->where('user_id', $userId ?: auth()->id())
+            ->delete();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(ThreadSubscription::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsSubscribedToAttribute ()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 }
