@@ -12,7 +12,10 @@ use App\User;
 class ThreadsFilters extends Filters
 {
 
-    protected $filters = ['by', 'popular'];
+    /**
+     * @var array
+     */
+    protected $filters = ['by', 'popular', 'unanswered'];
 
     /**
      * Filter the query by a given username
@@ -36,6 +39,17 @@ class ThreadsFilters extends Filters
     {
         $this->builder->getQuery()->orders = [];
         return $this->builder->orderBy('replies_count', 'desc');
+    }
+
+    /**
+     * Filter the query according to most
+     * popular threads
+     *
+     * @return mixed
+     */
+    protected function unanswered ()
+    {
+        return $this->builder->where('replies_count', 0);
     }
 
 }
