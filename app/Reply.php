@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Http\Controllers\FavoritesController;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model

@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class RepliesController extends Controller
 {
 
+
+    /**
+     * RepliesController constructor.
+     */
 	public function __construct ()
 	{
 		$this->middleware('auth', ['except' => 'index']);
@@ -73,5 +77,6 @@ class RepliesController extends Controller
 
         return back()->with('flash', 'Your reply has been deleted.');
     }
+
 
 }

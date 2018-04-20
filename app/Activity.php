@@ -29,7 +29,6 @@ class Activity extends Model
      * @param User
      * @param $take
      *
-     * @return static
      */
     public static function feed (User $user, $take = 50)
     {
